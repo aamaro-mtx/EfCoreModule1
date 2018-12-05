@@ -4,14 +4,23 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NorthWind.Dal;
 using NorthWind.Web.Models;
 
 namespace NorthWind.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly NorthWindContext _context;
+
+        public HomeController(NorthWindContext context)
+        {
+            this._context = context;
+        }
+
         public IActionResult Index()
         {
+            var tmp = _context.Categories.ToList();
             return View();
         }
 
